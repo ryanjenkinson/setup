@@ -42,8 +42,19 @@ set laststatus=2
 set t_Co=256
 set t_ut=
 
-" turn on line numbering
-set number
+" Source local .vimrc files
+set exrc
+
+" turn on line numbering and the current line number
+set relativenumber
+set nu
+
+" keep vim buffers around in the background
+set hidden
+
+" nice highlight searching
+set nohlsearch
+set incsearch
 
 " sane text files
 set fileformat=unix
@@ -54,8 +65,12 @@ set fileencoding=utf-8
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set colorcolumn=80
+set smartindent
 set expandtab
+set colorcolumn=80
+set signcolumn=yes
+set nowrap
+set scrolloff=10
 set viminfo='25,\"50,n~/.viminfo
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -106,6 +121,9 @@ let g:lightline = { 'colorscheme': 'onedark' }
 " code folding
 set foldmethod=indent
 set foldlevel=99
+
+" set leader key
+let mapleader=" "
 
 " wrap toggle
 setlocal nowrap
