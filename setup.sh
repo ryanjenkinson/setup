@@ -12,10 +12,11 @@ confirm() {
     esac
 }
 
+# TODO: Make these simlinks, and have separate .zshrc.local files for specific local setups
 setup_dotfiles() {
     # Move the dotfiles to the home directory
     echo "Moving dotfiles to home directory..."
-    cp -r dotfiles ~
+    cp -r dotfiles/ ~
 }
 
 # Set up scripts for each operating system
@@ -28,14 +29,22 @@ setup_macos() {
     else
         brew update
     fi
+    
     # Checking whether or not we should run the cask script
     confirm "(Re)install apps using Homebrew?" && cd macos && brew bundle && cd ../
 
+    # Installing oh-my-zsh
+    confirm "Do you want to install Oh My Zsh?" && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    
     # Setup the dotfiles
     setup_dotfiles
 }
 
 setup_linux() {
+    # Installing oh-my-zsh
+    confirm "Do you want to install Oh My Zsh?" && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"    
+
+    # Setup the dotfiles
     setup_dotfiles
 }
 
