@@ -156,9 +156,6 @@ function up() {
     cd "${cdir}"
 }
 
-# Add Homebrew's executable directory to the front of the PATH
-export PATH=/usr/local/bin:$PATH
-
 # Pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
