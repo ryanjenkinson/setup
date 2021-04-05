@@ -16,6 +16,7 @@ setup_dotfiles() {
     # Move the dotfiles to the home directory
     echo "Moving dotfiles to home directory..."
     cp -r dotfiles ~
+    source ~/.zshrc
 }
 
 # Set up scripts for each operating system
@@ -25,6 +26,8 @@ setup_macos() {
     if [[ $? != 0 ]] ; then
         # Install Homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # Add homebrew to the path
+        export PATH=/usr/local/bin:$PATH
     else
         brew update
     fi
