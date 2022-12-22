@@ -4,6 +4,7 @@ alias ohmyzsh="pico ~/.oh-my-zsh"
 alias c='clear'
 
 # Git aliases
+alias gbrm="git branch | grep -vE 'master|main' | xargs git branch -D"
 alias gi="git init"
 alias gs="git status -sbu"
 alias gco="git checkout"
