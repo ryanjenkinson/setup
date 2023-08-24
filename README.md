@@ -32,3 +32,6 @@ pyenv global 3.11.1
 pyenv install 3.10.5; pyenv local 3.10.5
 
 ```
+
+## Signed Commits
+Follow [this guide](https://github.com/microsoft/vscode/wiki/Commit-Signing) for Github Signed Commits
