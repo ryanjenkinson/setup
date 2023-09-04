@@ -33,5 +33,7 @@ pyenv install 3.10.5; pyenv local 3.10.5
 
 ```
 
+I'm a fan of [Rye](https://rye-up.com/), actively being [developed on Github](https://github.com/mitsuhiko/rye), which replaces all of the above Python management. When it is no longer experimental I will likely use that as my Python manager as it replaces `pyenv + poetry` very well.
+
 ## Signed Commits
 Follow [this guide](https://github.com/microsoft/vscode/wiki/Commit-Signing) for Github Signed Commits
