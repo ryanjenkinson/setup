@@ -18,8 +18,6 @@ setup_macos() {
     sh scripts/setup_homebrew.sh
     echo "🚧 Setting up dotfiles 🚧"
     sh scripts/setup_dotfiles.sh
-    echo "🚧 Setting up poetry 🚧"
-    sh scripts/setup_poetry.sh
 }
 
 setup_linux() {
@@ -27,8 +25,6 @@ setup_linux() {
     sh scripts/setup_homebrew.sh
     echo "🚧 Setting up dotfiles 🚧"
     sh scripts/setup_dotfiles.sh
-    echo "🚧 Setting up poetry 🚧"
-    sh scripts/setup_poetry.sh
 }
 
 # The main function, which detects the operating system and runs the setup function

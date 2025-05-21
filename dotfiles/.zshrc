@@ -1,32 +1,31 @@
 # Example aliases
-alias zshconfig="pico ~/.zshrc"
-alias ohmyzsh="pico ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
 alias c='clear'
 
 # Git aliases
 alias gbrm="git branch | grep -vE 'master|main' | xargs git branch -D"
-alias gi="git init"
-alias gs="git status -sbu"
-alias gco="git checkout"
-alias gcob="git checkout -b"
-alias gp="git push"
-alias gm="git merge"
-alias ga="git add"
-alias gaall="git add ."
-alias gcm="git commit -m"
-alias gpl="git pull"
-alias gst="git stash"
-alias gstl="git stash list"
-alias gstp="git stash pop"
+alias grb='git rebase -i `git rev-list origin/master.. | tail -1`^'
+alias gca='git commit --amend --no-edit'
 alias glg='git log --graph --oneline --decorate --all'
 gclonecd() {
   git clone "$1" && cd "$(basename "$1" .git)"
 }
+git-checkout() {
+    local current_dir=$(basename "$PWD")
+    local branch_suffix=$1
+    local branch_name="rj/${current_dir}/${branch_suffix}"
+    git checkout -b "$branch_name"
+}
+alias gc='git-checkout'
 
 # Docker aliases
 alias dpsa="docker ps -a"
 alias dcup="docker-compose up"
 alias dcupd="docker-compose up -d"
+
+# Python project aliases
+# Note: make sure have set up direnvrc with uv
+alias autoenv="echo 'layout uv' > .envrc && direnv allow"
 
 # Create a new directory and enter it
 function mkd() {
@@ -57,14 +56,6 @@ function up() {
 # Add Homebrew's executable directory to the front of the PATH
 export PATH=/usr/local/bin:$PATH
 
-# Pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
-# We use poetry for virtualenv, so add it to the path
-PATH="$HOME/.poetry/bin:$PATH"
-
 # Direnv for autoenv hooks
 eval "$(direnv hook zsh)"
 
@@ -73,3 +64,23 @@ export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PA
 
 # Starship prompt
 eval "$(starship init zsh)"
+
+# Signing key for Github (see: https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key)
+export GPG_TTY=$(tty)
+
+# Any local config
+source ~/.zshrc.local
+
+# Local binaries
+export PATH=".local/bin:$PATH"
+
+# nvm - manage multiple node versions
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# zoxide- smarter cd
+eval "$(zoxide init zsh)"
+
+fpath+=/opt/homebrew/share/zsh/site-functions
+autoload -Uz compinit && compinit
